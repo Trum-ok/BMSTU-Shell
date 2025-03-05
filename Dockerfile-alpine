@@ -5,4 +5,4 @@ RUN apk add --no-cache bash
 WORKDIR /app
 VOLUME /app/BMSTU-PTP
 
-CMD ["ls", "-la", "/app"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
