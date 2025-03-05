@@ -6,7 +6,11 @@ services:
       dockerfile: Dockerfile-ubuntu-24
     volumes:
       - "../BMSTU-PTP:/app/BMSTU-PTP"
+      - "../BMSTU-C:/app/BMSTU-C"
+      - "../BMSTU-C:/app/BMSTU-Phys"
       - "./ubuntu-files:/app/files"
+      - "$HOME/.gitconfig:/root/.gitconfig"
+      - "$HOME/.git-aliases:/root/.git-aliases"
 
   alpine:
     container_name: alpine3
@@ -15,4 +19,8 @@ services:
       dockerfile: Dockerfile-alpine
     volumes:
       - "../BMSTU-PTP:/app/BMSTU-PTP"
+      - "../BMSTU-C:/app/BMSTU-C"
+      - "../BMSTU-C:/app/BMSTU-Phys"
       - "./alpine-files:/app/files"
+      - "$HOME/.gitconfig:/root/.gitconfig"      
+      - "$HOME/.git-aliases:/root/.git-aliases"  
