@@ -6,6 +6,8 @@ RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repo
     vim \
     clang \
     llvm \
+    shellcheck \
+    git \
     lcov
 
 WORKDIR /app
