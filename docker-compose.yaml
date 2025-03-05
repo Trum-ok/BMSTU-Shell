@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile-ubuntu-24
     volumes:
       - "../BMSTU-PTP:/app/BMSTU-PTP"
+      - "./ubuntu-files:/app/files"
 
   alpine:
     container_name: alpine3
@@ -14,3 +15,4 @@ services:
       dockerfile: Dockerfile-alpine
     volumes:
       - "../BMSTU-PTP:/app/BMSTU-PTP"
+      - "./alpine-files:/app/files"
