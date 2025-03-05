@@ -1,0 +1,18 @@
+services:
+  ubuntu:
+    container_name: ubuntu24
+    build:
+      context: .
+      dockerfile: Dockerfile-ubuntu-24
+    volumes:
+      - "../BMSTU-PTP:/app/BMSTU-PTP"
+    restart: unless-stopped
+
+  alpine:
+    container_name: alpine3
+    build:
+      context: .
+      dockerfile: Dockerfile-alpine
+    volumes:
+      - "../BMSTU-PTP:/app/BMSTU-PTP"
+    restart: unless-stopped

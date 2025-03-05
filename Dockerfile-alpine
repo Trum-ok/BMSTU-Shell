@@ -1,0 +1,8 @@
+FROM alpine:3.21.3
+
+RUN apk add --no-cache bash
+
+WORKDIR /app
+VOLUME /app/BMSTU-PTP
+
+CMD ["ls", "-la", "/app"]
