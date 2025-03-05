@@ -1,8 +1,14 @@
 FROM alpine:3.21.3
 
-RUN apk add --no-cache bash
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+    apk update && apk add --no-cache \
+    bash \
+    vim \
+    clang \
+    llvm \
+    lcov
 
 WORKDIR /app
-VOLUME /app/BMSTU-PTP
+VOLUME /app/files
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]

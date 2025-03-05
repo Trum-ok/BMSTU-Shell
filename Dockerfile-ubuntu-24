@@ -2,8 +2,13 @@ FROM ubuntu:24.04
 
 RUN apt-get update && apt-get install -y \
     curl \
+    vim \
+    clang \
+    llvm \
+    lcov \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
+VOLUME /app/files
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
