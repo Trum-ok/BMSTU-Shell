@@ -5,7 +5,6 @@ services:
       context: ./
       dockerfile: Dockerfile-ubuntu-24
     volumes:
-      # - "./ubuntu-files/usr/bin:/usr/bin"
       - "../BMSTU-PTP:/app/BMSTU-PTP"
       - "../BMSTU-C:/app/BMSTU-C"
       - "../BMSTU-C:/app/BMSTU-Phys"
