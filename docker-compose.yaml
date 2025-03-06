@@ -5,10 +5,10 @@ services:
       context: ./
       dockerfile: Dockerfile-ubuntu-24
     volumes:
+      # - "./ubuntu-files/usr/bin:/usr/bin"
       - "../BMSTU-PTP:/app/BMSTU-PTP"
       - "../BMSTU-C:/app/BMSTU-C"
       - "../BMSTU-C:/app/BMSTU-Phys"
-      - "./ubuntu-files:/app/files"
       - "$HOME/.gitconfig:/root/.gitconfig"
       - "$HOME/.git-aliases:/root/.git-aliases"
 
