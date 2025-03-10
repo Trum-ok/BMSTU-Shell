@@ -1,6 +1,9 @@
+# syntax=docker/dockerfile:latest
 FROM ubuntu:24.04
 
-RUN apt-get update \
+RUN --mount=type=cache,target=/var/cache/apt \
+    --mount=type=cache,target=/var/lib/apt \ 
+    apt-get update \
     && apt-get install -y --no-install-recommends \
     clang \
     curl \
