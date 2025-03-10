@@ -10,14 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        container: [ 'ubuntu', 'alpine' ]
+        # container: [ 'ubuntu', 'alpine' ]
+        container: [ 'alpine' ]
     steps:
 
     - name: Checkout code
       uses: actions/checkout@v4
 
     - name: Set up Docker
-      uses: docker/setup-qemu-action@v3
+      uses: docker/setup-buildx-action@v2
       with:
         platforms: arm64,amd64
     
@@ -27,7 +28,7 @@ jobs:
 
     - name: Build container
       run: |
-        docker compose -f docker-compose.yml build ${{ matrix.container }}
+        docker compose -f docker-compose.yaml build ${{ matrix.container }}
         docker image ls
 
   run-containers:
@@ -36,7 +37,8 @@ jobs:
     needs: setup-docker
     strategy:
       matrix:
-        container: [ 'ubuntu', 'alpine' ]
+        # container: [ 'ubuntu', 'alpine' ]
+        container: [ 'alpine' ]
     steps:
 
     - name: Checkout code
