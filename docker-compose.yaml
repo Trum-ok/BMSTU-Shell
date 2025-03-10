@@ -7,9 +7,11 @@ services:
     volumes:
       - "../BMSTU-PTP:/app/BMSTU-PTP"
       - "../BMSTU-C:/app/BMSTU-C"
-      - "../BMSTU-C:/app/BMSTU-Phys"
+      - "../BMSTU-Phys:/app/BMSTU-Phys"
+      - "../vi:/app/vi"
       - "$HOME/.gitconfig:/root/.gitconfig"
       - "$HOME/.git-aliases:/root/.git-aliases"
+      - "./ubuntu-files:/app/files"
 
   alpine:
     container_name: alpine3
