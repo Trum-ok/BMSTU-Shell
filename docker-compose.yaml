@@ -4,6 +4,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile-ubuntu-24
+    platform: linux/arm64
     volumes:
       - "../BMSTU-PTP:/app/BMSTU-PTP"
       - "../BMSTU-C:/app/BMSTU-C"
@@ -18,6 +19,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile-alpine
+    platform: linux/arm64
     volumes:
       - "../BMSTU-PTP:/app/BMSTU-PTP"
       - "../BMSTU-C:/app/BMSTU-C"
