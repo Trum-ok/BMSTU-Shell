@@ -5,6 +5,8 @@ services:
       context: ./
       dockerfile: Dockerfile-ubuntu-24
     platform: linux/arm64
+    environment:
+      - PATH=/usr/local/bin/scripts:${PATH}
     volumes:
       - "../BMSTU-PTP:/app/BMSTU-PTP"
       - "../BMSTU-C:/app/BMSTU-C"
@@ -13,6 +15,25 @@ services:
       - "$HOME/.gitconfig:/root/.gitconfig"
       - "$HOME/.git-aliases:/root/.git-aliases"
       - "./ubuntu-files:/app/files"
+      - "../scripts:/usr/local/bin/scripts"
+
+  ubuntu2:
+    container_name: ubuntu22
+    build:
+      context: ./
+      dockerfile: Dockerfile-ubuntu-22
+    platform: linux/arm64
+    environment:
+      - PATH=/usr/local/bin/scripts:${PATH}
+    volumes:
+      - "../BMSTU-PTP:/app/BMSTU-PTP"
+      - "../BMSTU-C:/app/BMSTU-C"
+      - "../BMSTU-Phys:/app/BMSTU-Phys"
+      - "../vi:/app/vi"
+      - "$HOME/.gitconfig:/root/.gitconfig"
+      - "$HOME/.git-aliases:/root/.git-aliases"
+      - "./ubuntu-files:/app/files"
+      - "../scripts:/usr/local/bin/scripts"
 
   alpine:
     container_name: alpine3
