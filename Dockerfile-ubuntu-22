@@ -1,0 +1,21 @@
+# syntax=docker/dockerfile:latest
+FROM ubuntu:22.04
+
+RUN --mount=type=cache,target=/var/cache/apt \
+    --mount=type=cache,target=/var/lib/apt \ 
+    apt-get update \
+    && apt-get install -y --no-install-recommends \
+    clang \
+    curl \
+    file \
+    git \
+    lcov \
+    llvm \
+    shellcheck \
+    vim \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+ENTRYPOINT ["tail", "-f", "/dev/null"]
