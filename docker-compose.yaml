@@ -41,10 +41,14 @@ services:
       context: ./
       dockerfile: Dockerfile-alpine
     platform: linux/arm64
+    environment:
+      - PATH=/usr/local/bin/scripts:${PATH}
     volumes:
       - "../BMSTU-PTP:/app/BMSTU-PTP"
       - "../BMSTU-C:/app/BMSTU-C"
-      - "../BMSTU-C:/app/BMSTU-Phys"
-      - "./alpine-files:/app/files"
+      - "../BMSTU-Phys:/app/BMSTU-Phys"
+      - "../vi:/app/vi"
       - "$HOME/.gitconfig:/root/.gitconfig"      
-      - "$HOME/.git-aliases:/root/.git-aliases"  
+      - "$HOME/.git-aliases:/root/.git-aliases"
+      - "./alpine-files:/app/files"
+      - "../scripts:/usr/local/bin/scripts"
