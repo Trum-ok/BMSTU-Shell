@@ -1,16 +1,21 @@
+# syntax=docker/dockerfile:latest
 FROM alpine:3.21.3
+
+RUN echo -e '\n# Auto-Warpify\nprintf '\''\eP$f{"hook": "SourcedRcFileForWarp", "value": { "shell": "bash", "uname": "'$(uname)'" }}\x9c'\'' ' >> ~/.bashrc
 
 RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     apk update && apk add --no-cache \
     bash \
-    vim \
     clang \
-    llvm \
-    shellcheck \
+    curl \
+    file \
     git \
-    lcov
+    llvm \
+    lcov \
+    shellcheck \
+    vim \
+    wget
 
 WORKDIR /app
-VOLUME /app/files
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]
