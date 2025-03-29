@@ -1,6 +1,8 @@
 # syntax=docker/dockerfile:latest
 FROM ubuntu:24.04
 
+RUN echo -e '\n# Auto-Warpify\nprintf '\''\eP$f{"hook": "SourcedRcFileForWarp", "value": { "shell": "bash", "uname": "Linux" }}\x9c'\'' ' >> ~/.bashrc
+
 RUN --mount=type=cache,target=/var/cache/apt \
     --mount=type=cache,target=/var/lib/apt \ 
     apt-get update \
