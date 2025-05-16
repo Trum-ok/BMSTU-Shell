@@ -1,4 +1,4 @@
 .DS_Store
 
 docker-compose.ci.yaml
-files/
+extra/
