@@ -1,0 +1,73 @@
+name: Containers Check
+
+on: [push, pull_request]
+
+jobs:
+  create-compose-yaml:
+    name: Create docker-compose.ci.yaml
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.3'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Create docker-compose.ci.yaml
+        run: |
+          python scripts/generate_ci_compose.py
+
+      - name: Upload docker-compose.ci.yaml
+        uses: actions/upload-artifact@v3
+        with:
+          name: compose
+          path: docker-compose.ci.yaml
+
+  test-containers:
+    name: Build and Test Containers
+    needs: [create-compose-yaml]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        container: [ 'ubuntu24', 'ubuntu22', 'alpine3' ]
+    steps:
+      - name: Download docker-compose.ci.yaml
+        uses: actions/download-artifact@v3
+        with:
+          name: compose
+          path: .
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build & start container
+        run: |
+          docker compose -f docker-compose.ci.yaml up -d ${{ matrix.container }}
+          sleep 10
+
+      - name: Copy tests to container
+        run: docker cp tests/. ${{ matrix.container }}:/app/tests
+
+      - name: Run tests inside container
+        run: |
+          docker exec ${{ matrix.container }} sh -c "cd /app/tests && \
+            for f in *; do \
+              case \"$f\" in \
+                *.c) gcc \"$f\" -o \"${f%.c}\" && ./\"${f%.c}\" ;; \
+                *.py) python3 \"$f\" ;; \
+                *) echo 'Skipping $f' ;; \
+              esac; \
+            done"
+
+      - name: Cleanup
+        if: always()
+        run: docker compose -f docker-compose.ci.yaml down
