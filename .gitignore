@@ -1,2 +1,4 @@
-alpine-files/
-ubuntu-files/
+.DS_Store
+
+docker-compose.ci.yaml
+files/
