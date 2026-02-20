@@ -11,7 +11,7 @@ SRC = 'docker-compose.yaml'
 OUT = 'docker-compose.ci.yaml'
 
 
-def main():
+def main() -> None:
     try:
         with open(SRC, 'r') as f:
             data: dict = yaml.safe_load(f)

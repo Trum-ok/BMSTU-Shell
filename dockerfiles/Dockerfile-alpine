@@ -1,4 +1,5 @@
 # syntax=docker/dockerfile:latest
+
 FROM alpine:3.21.3
 
 RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
@@ -14,9 +15,11 @@ RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repo
     vim \
     wget
 
-# Auto warpify for Warp Terminal
+# Auto warpify for Warp Terminal (--build-arg WARPIFY=false to disable)
+ARG WARPIFY=true
 COPY scripts/warpify.sh /usr/local/bin/warpify.sh
-RUN chmod +x /usr/local/bin/warpify.sh && /usr/local/bin/warpify.sh
+RUN chmod +x /usr/local/bin/warpify.sh && \
+    if [ "$WARPIFY" = "true" ]; then /usr/local/bin/warpify.sh; fi
 
 WORKDIR /app
 ENTRYPOINT ["tail", "-f", "/dev/null"]

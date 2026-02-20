@@ -8,11 +8,19 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     curl \
     file \
     git \
+    gcov \
+    gdb \
+    ghostscript \
     lcov \
     llvm \
     shellcheck \
+    shfmt \
     vim \
     wget \
     python3 \
     python3-pip \
-    && rm -rf /var/lib/apt/lists/*
+    libasan* \
+    libubsan* \
+    libtsan* \
+    liblsan* \
+    libc6-dbg

@@ -1,21 +1,9 @@
 x-defaults: &defaults
-  platform: linux/arm64                           # у меня так
   environment:
     - PATH=/usr/local/bin/scripts:${PATH}
   volumes:
-    # стоит оставить в любом случае (возможно стоит поправить путь)
-    - "$HOME/.gitconfig:/root/.gitconfig"         # для работы с гитом с того же аккаунта, что на основной системе
-    - "$HOME/.git-aliases:/root/.git-aliases"     # перетащить алиасы с основной системы
-
-    # обязательно(!) поменять под себя
-    - "./extra:/app/extra"                        # удобная директория для кросплатформенной работы с файлами
-    - "../scripts:/usr/local/bin/scripts"         # скрипты для птп и си, которые доступны во всей контейнерной системе
-    - "../BMSTU-PTP:/app/BMSTU-PTP"
-    - "../BMSTU-C:/app/BMSTU-C"
-    # - "../BMSTU-Phys:/app/BMSTU-Phys"
-    # - "../vi:/app/vi"
-    - "../iu7-ptp-2sem-2025-sort-eltime-aad24u790-artamonovad:/app/BMSTU-PTP-eltime"
-    - "../iu7-ptp-2sem-2025-matrices-aad24u790-artamonovad:/app/BMSTU-PTP-matrices"
+    - "$HOME/.gitconfig:/root/.gitconfig"
+    - "$HOME/.git-aliases:/root/.git-aliases"
 
 services:
   ubuntu24:
@@ -23,14 +11,18 @@ services:
     <<: *defaults
     build:
       context: ./
-      dockerfile: dockerfiles/Dockerfile-ubuntu-24
+      dockerfile: dockerfiles/Dockerfile-ubuntu
+      args:
+        UBUNTU_VERSION: "24.04"
 
   ubuntu22:
     container_name: ubuntu22
     <<: *defaults
     build:
       context: ./
-      dockerfile: dockerfiles/Dockerfile-ubuntu-22
+      dockerfile: dockerfiles/Dockerfile-ubuntu
+      args:
+        UBUNTU_VERSION: "22.04"
 
   alpine3:
     container_name: alpine3
@@ -39,4 +31,4 @@ services:
       context: ./
       dockerfile: dockerfiles/Dockerfile-alpine
 
-  # это все, которыми я пользуюсь на постоянной основе, можно докинуть еще при необходимоти (arch btw)
+  # arch btw

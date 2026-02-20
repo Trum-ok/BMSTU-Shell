@@ -1,6 +1,7 @@
 # syntax=docker/dockerfile:latest
 
-FROM ubuntu:22.04 AS base
+ARG UBUNTU_VERSION=24.04
+FROM ubuntu:${UBUNTU_VERSION} AS base
 
 COPY scripts/install_deps.sh /usr/local/bin/install_deps.sh
 RUN --mount=type=cache,target=/var/cache/apt \
@@ -9,15 +10,13 @@ RUN --mount=type=cache,target=/var/cache/apt \
 
 ####################################
 
-FROM base AS warpify
+FROM base
 
-# Auto warpify for Warp Terminal
+# Auto warpify for Warp Terminal (--build-arg WARPIFY=false to disable)
+ARG WARPIFY=true
 COPY scripts/warpify.sh /usr/local/bin/warpify.sh
-RUN chmod +x /usr/local/bin/warpify.sh && /usr/local/bin/warpify.sh
-
-####################################
-
-FROM warpify AS final
+RUN chmod +x /usr/local/bin/warpify.sh && \
+    if [ "$WARPIFY" = "true" ]; then /usr/local/bin/warpify.sh; fi
 
 WORKDIR /app
 ENTRYPOINT ["tail", "-f", "/dev/null"]

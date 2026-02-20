@@ -1,4 +1,24 @@
+# macos
 .DS_Store
 
-docker-compose.ci.yaml
+# py
+__pycache__/
+*.pyc
+.pytest_cache/
+.python-version
+venv/
+.venv/
+
+# env & logs
+.env
+*.log
+
+# IDE
+.idea/
+.vscode/
+
+# docker
+docker-compose.override.yaml
+
+# misc
 extra/

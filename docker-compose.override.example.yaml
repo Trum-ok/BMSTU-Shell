@@ -1,0 +1,22 @@
+# Скопируйте этот файл:
+#   cp docker-compose.override.example.yaml docker-compose.override.yaml
+# и настройте под себя. Файл docker-compose.override.yaml в .gitignore.
+
+x-my-volumes: &my-volumes
+  volumes:
+    - "./extra:/app/extra"                        # директория для работы с файлами
+    # - "../scripts:/usr/local/bin/scripts"       # свои скрипты, доступные во всей системе
+    # - "../my-project:/app/my-project"           # монтировать свой проект
+
+services:
+  ubuntu24:
+    # platform: linux/arm64                       # раскомментировать для Apple Silicon
+    <<: *my-volumes
+
+  ubuntu22:
+    # platform: linux/arm64
+    <<: *my-volumes
+
+  alpine3:
+    # platform: linux/arm64
+    <<: *my-volumes
