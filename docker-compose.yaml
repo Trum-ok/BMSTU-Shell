@@ -1,6 +1,8 @@
 x-defaults: &defaults
   environment:
     - PATH=/usr/local/bin/scripts:${PATH}
+    - LANG=ru_RU.UTF-8
+    - LC_ALL=ru_RU.UTF-8
   volumes:
     - "$HOME/.gitconfig:/root/.gitconfig"
     - "$HOME/.git-aliases:/root/.git-aliases"
