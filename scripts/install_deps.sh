@@ -8,7 +8,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     curl \
     file \
     git \
-    gcov \
+    gcc \
     gdb \
     ghostscript \
     lcov \
