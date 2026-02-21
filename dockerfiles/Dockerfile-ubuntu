@@ -4,8 +4,7 @@ ARG UBUNTU_VERSION=24.04
 FROM ubuntu:${UBUNTU_VERSION} AS base
 
 COPY scripts/install_deps.sh /usr/local/bin/install_deps.sh
-RUN --mount=type=cache,target=/var/cache/apt \
-    --mount=type=cache,target=/var/lib/apt \
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     bash /usr/local/bin/install_deps.sh
 
 ####################################
