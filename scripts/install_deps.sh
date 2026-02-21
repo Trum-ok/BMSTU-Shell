@@ -23,4 +23,9 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     libubsan* \
     libtsan* \
     liblsan* \
-    libc6-dbg
+    libc6-dbg \
+    locales
+
+echo "ru_RU.UTF-8 UTF-8" > /etc/locale.gen
+locale-gen ru_RU.UTF-8
+update-locale LANG=ru_RU.UTF-8 LC_ALL=ru_RU.UTF-8
